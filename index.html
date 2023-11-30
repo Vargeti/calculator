@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Простой калькулятор</title>
+     <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        input {
+            padding: 10px;
+            font-size: 16px;
+        }
+
+        select, button {
+            padding: 10px 20px;
+            font-size: 16px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Простой калькулятор</h1>
+
+    <label for="num1">Введите первое число: </label>
+    <input type="number" id="num1">
+
+    <label for="operator">Выберите операцию: </label>
+    <select id="operator">
+        <option value="+">+</option>
+        <option value="-">-</option>
+        <option value="*">*</option>
+        <option value="/">/</option>
+    </select>
+
+    <label for="num2">Введите второе число: </label>
+    <input type="number" id="num2">
+
+    <button onclick="calculate()">Вычислить</button>
+
+    <script>
+        function calculate() {
+            // Получаем значения чисел и оператора
+            var num1 = parseFloat(document.getElementById('num1').value);
+            var operator = document.getElementById('operator').value;
+            var num2 = parseFloat(document.getElementById('num2').value);
+
+            // Проверяем, что введены корректные числа
+            if (isNaN(num1) || isNaN(num2)) {
+                alert('Пожалуйста, введите корректные числа.');
+                return;
+            }
+
+            // Вычисляем результат в зависимости от оператора
+            var result;
+            switch (operator) {
+                case '+':
+                    result = sum(num1, num2);
+                    break;
+                case '-':
+                    result = subtract(num1, num2);
+                    break;
+                case '*':
+                    result = multiply(num1, num2);
+                    break;
+                case '/':
+                    result = divide(num1, num2);
+                    break;
+                default:
+                    alert('Выбрана неподдерживаемая операция.');
+                    return;
+            }
+
+            // Выводим результат
+            alert(`Результат: ${result}`);
+        }
+
+        // Функции для математических операций
+        function sum(a, b) {
+            return a + b;
+        }
+
+        function subtract(a, b) {
+            return a - b;
+        }
+
+        function multiply(a, b) {
+            return a * b;
+        }
+
+        function divide(a, b) {
+            // Проверка деления на ноль
+            if (b === 0) {
+                alert('Деление на ноль невозможно.');
+                return;
+            }
+            return a / b;
+        }
+    </script>
+</body>
+</html>
